@@ -47,7 +47,7 @@ cat <<EOF >/etc/caddy/Caddyfile.json
                     "match": [{"host": ["$domain"]}],
                     "handle": [{
                         "handler": "file_server",
-						"root": "/usr/share/caddy"
+                        "root": "/usr/share/caddy"
                     }],
                     "terminal": true
                     }],
