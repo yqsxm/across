@@ -3,21 +3,24 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Usage:  debian 9/10 one_key naiveproxy： https://github.com/klzgrad/naiveproxy
 # install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/naiveproxy/naiveproxy.sh) my.domain.com my@gmail.com
-# uninstall: systemctl disable caddy; systemctl stop caddy; rm -rf /usr/bin/caddy /lib/systemd/system/caddy.service
+# uninstall: apt purge caddy -y
 ## Tips: 个人使用，仅供参考
 
-# var
+# tempfile & rm it when exit
+trap 'rm -f "$TMPFILE"' EXIT
+TMPFILE=$(mktemp) || exit 1
+
+########
 [[ $# != 2 ]] && echo Err !!! Useage: bash this_script.sh my.domain.com my@gmail.com && exit 1
 domain="$1" && email="$2"
+########
 
 # caddy with naive fork of forwardproxy: https://github.com/klzgrad/forwardproxy
+deb_caddyURL="$(wget -qO-  https://api.github.com/repos/caddyserver/caddy/releases | grep -E "browser_download_url.*linux_amd64\.deb" | cut -f4 -d\" | head -n1)"
+wget -O $TMPFILE $deb_caddyURL && dpkg -i $TMPFILE
 naivecaddyURL="https://github.com/mixool/script/raw/source/naivecaddy.gz"
 rm -rf /usr/bin/caddy
 wget --no-check-certificate -O - $naivecaddyURL | gzip -d > /usr/bin/caddy && chmod +x /usr/bin/caddy
-mkdir -p /usr/share/caddy
-wget --no-check-certificate -O /lib/systemd/system/caddy.service https://raw.githubusercontent.com/caddyserver/dist/master/init/caddy.service
-wget --no-check-certificate -O /usr/share/caddy/index.html https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html
-sed -i -e "s/User=caddy$/User=root/g" -e "/Group=caddy$/d" -e "s/caddy\/Caddyfile$/caddy\/Caddyfile\.json/g" -e "s/^LimitNPROC=.*/LimitNPROC=51200/g" /lib/systemd/system/caddy.service
 
 # secrets
 username="$(tr -dc 'a-z0-9A-Z' </dev/urandom | head -c 16)"
