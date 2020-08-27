@@ -15,9 +15,12 @@ TMPFILE=$(mktemp) || exit 1
 domain="$1" && email="$2"
 ########
 
-# caddy with naive fork of forwardproxy: https://github.com/klzgrad/forwardproxy
+# dpkg install caddy
 deb_caddyURL="$(wget -qO-  https://api.github.com/repos/caddyserver/caddy/releases | grep -E "browser_download_url.*linux_amd64\.deb" | cut -f4 -d\" | head -n1)"
 wget -O $TMPFILE $deb_caddyURL && dpkg -i $TMPFILE
+sed -i "s/caddy\/Caddyfile$/caddy\/Caddyfile\.json/g" /lib/systemd/system/caddy.service
+
+# replace caddy with naive fork of forwardproxy: https://github.com/klzgrad/forwardproxy
 naivecaddyURL="https://github.com/mixool/script/raw/source/naivecaddy.gz"
 rm -rf /usr/bin/caddy
 wget --no-check-certificate -O - $naivecaddyURL | gzip -d > /usr/bin/caddy && chmod +x /usr/bin/caddy
