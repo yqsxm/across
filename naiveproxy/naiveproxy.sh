@@ -14,7 +14,9 @@ domain="$1" && email="$2"
 naivecaddyURL="https://github.com/mixool/script/raw/source/naivecaddy.gz"
 rm -rf /usr/bin/caddy
 wget --no-check-certificate -O - $naivecaddyURL | gzip -d > /usr/bin/caddy && chmod +x /usr/bin/caddy
+mkdir -p /usr/share/caddy
 wget --no-check-certificate -O /lib/systemd/system/caddy.service https://raw.githubusercontent.com/caddyserver/dist/master/init/caddy.service
+wget --no-check-certificate -O /usr/share/caddy/index.html https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html
 sed -i -e "s/User=caddy$/User=root/g" -e "/Group=caddy$/d" -e "s/caddy\/Caddyfile$/caddy\/Caddyfile\.json/g" -e "s/^LimitNPROC=.*/LimitNPROC=51200/g" /lib/systemd/system/caddy.service
 
 # secrets
@@ -44,8 +46,8 @@ cat <<EOF >/etc/caddy/Caddyfile.json
                     }, {
                     "match": [{"host": ["$domain"]}],
                     "handle": [{
-                        "handler": "static_response",
-                        "body": "Hello, world!"
+                        "handler": "file_server",
+						"root": "/usr/share/caddy"
                     }],
                     "terminal": true
                     }],
