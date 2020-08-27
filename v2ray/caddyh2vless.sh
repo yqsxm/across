@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Usage:  debian 9/10 one_key for caddy2 v2ray
 # install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/v2ray/caddyh2vless.sh) my.domain.com
-# uninstall: apt purge caddy -y; systemctl disable caddy; systemctl stop caddy; rm -rf /etc/caddy /lib/systemd/system/caddy.service; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; rm -rf /usr/local/etc/v2ray /var/log/v2ray
+# uninstall: apt purge caddy -y; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; rm -rf /usr/local/etc/v2ray /var/log/v2ray
 
 # tempfile & rm it when exit
 trap 'rm -f "$TMPFILE"' EXIT
@@ -19,10 +19,6 @@ v2my_path=$(tr -dc 'a-z0-9A-Z' </dev/urandom | head -c 16)
 # install caddy
 caddyURL="$(wget -qO-  https://api.github.com/repos/caddyserver/caddy/releases | grep -E "browser_download_url.*linux_amd64\.deb" | cut -f4 -d\" | head -n1)"
 wget -O $TMPFILE $caddyURL && dpkg -i $TMPFILE
-mkdir -p /usr/share/caddy
-wget --no-check-certificate -O /lib/systemd/system/caddy.service https://raw.githubusercontent.com/caddyserver/dist/master/init/caddy.service
-wget --no-check-certificate -O /usr/share/caddy/index.html https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html
-sed -i -e "s/User=caddy$/User=root/g" -e "/Group=caddy$/d" -e "s/^LimitNPROC=.*/LimitNPROC=51200/g" /lib/systemd/system/caddy.service
 
 # install v2ray; update geoip.dat && geosite.dat
 bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
