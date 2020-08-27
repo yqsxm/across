@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Usage:  debian 9/10 one_key for caddy2 v2ray
-# install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/caddyh2vless.sh) my.domain.com
+# install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/v2ray/caddyh2vless.sh) my.domain.com
 # uninstall: systemctl disable caddy; systemctl stop caddy; rm -rf /etc/caddy/Caddyfile /lib/systemd/system/caddy.service; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; rm -rf /usr/local/etc/v2ray /var/log/v2ray
 
 # tempfile & rm it when exit
