@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage:
-#   curl https://raw.githubusercontent.com/mixool/across/ssh/securityssh.sh | bash
+#   curl https://raw.githubusercontent.com/mixool/across/master/ssh/securityssh.sh | bash
 
 [[ "$(id -u)" != "0" ]] && echo "ERROR: Please run as root" && exit 1
 
