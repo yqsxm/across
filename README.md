@@ -1,2 +1,7 @@
-# across
-Across the Great Wall we can reach every corner in the world
+### Some scripts collection  for Debian
+```bash
+apt update && apt install curl vim wget -y
+```  
+---  
+#### security ssh  
+`curl https://raw.githubusercontent.com/mixool/across/securityssh.sh | bash`  
