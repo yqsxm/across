@@ -41,7 +41,7 @@ cat <<EOF >/usr/local/etc/v2ray/config.json
     [
         {
             "port": 443,"protocol": "vless",
-            "settings": {"clients": [{"id": "$v2my_uuid"}],"decryption": "none","fallback": {"port": 80}},
+            "settings": {"clients": [{"id": "$v2my_uuid"}],"decryption": "none","fallbacks": [{"port": 80,"dest": 80}]},
             "streamSettings": {"security": "tls","tlsSettings": {"alpn": ["http/1.1"],"certificates": [{"certificateFile": "/usr/local/etc/v2ray/v2ray.crt","keyFile": "/usr/local/etc/v2ray/v2ray.key"}]}}
         }
     ],
