@@ -34,6 +34,10 @@ probe_resistance="$(tr -dc 'a-z0-9' </dev/urandom | head -c 32).com"
 cat <<EOF >/etc/caddy/Caddyfile.json
 {
     "admin": {"disabled": true},
+    "logging": {
+    "sink": {"writer": {"output": "discard"}},
+    "logs": {"default": {"writer": {"output": "discard"}}}
+    },
     "apps": {
         "http": {
             "servers": {
