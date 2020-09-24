@@ -6,7 +6,6 @@
 ### 如不启用cloudflare cdn，脚本运行前需要关闭cloudflare的小云朵
 ### 如需启用cloudflare cdn，脚本运行前需要打开cloudflare的小云朵并设置ssl为full以上，并在脚本运行完成后修改两端的config.json文件中websocket项的false改为true后重新运行服务
 
-
 # tempfile & rm it when exit
 trap 'rm -f "$TMPFILE"' EXIT
 TMPFILE=$(mktemp) || exit 1
