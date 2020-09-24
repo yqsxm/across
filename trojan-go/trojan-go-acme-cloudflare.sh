@@ -21,6 +21,7 @@ export CF_Email="$3"
 apt install socat -y
 curl https://get.acme.sh | sh
 source  ~/.bashrc
+/root/.acme.sh/acme.sh --upgrade  --auto-upgrade
 /root/.acme.sh/acme.sh --issue --dns dns_cf --keylength ec-256 -d $domain --force
 rm -rf /etc/trojan-go; mkdir -p /etc/trojan-go
 /root/.acme.sh/acme.sh --installcert -d $domain --ecc --fullchain-file /etc/trojan-go/trojan-go.crt --key-file /etc/trojan-go/trojan-go.key --reloadcmd "service trojan-go restart"
