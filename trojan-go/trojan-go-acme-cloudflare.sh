@@ -51,9 +51,9 @@ cat <<EOF > /etc/trojan-go/config.json
         "key": "/etc/trojan-go/trojan-go.key"
     },
     "websocket": {
-		"enabled": false,
-		"path": "/$webspath"
-	}
+        "enabled": false,
+        "path": "/$webspath"
+    }
 }
 EOF
 
@@ -72,9 +72,9 @@ cat <<EOF >$TMPFILE
         "$password"
     ],
     "websocket": {
-    "enabled": false,
-    "path": "/$webspath"
-	}
+        "enabled": false,
+        "path": "/$webspath"
+    }
 }
 EOF
 
