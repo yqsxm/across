@@ -3,7 +3,7 @@
 # Usage: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/trojan-go/trojan-go-acme-cloudflare.sh) my.domain.com CF_Key CF_Email
 ## one key install trojan-go with acme and cloudflareApi
 ## Uninstall: /root/.acme.sh/acme.sh --uninstall; systemctl stop trojan-go.service; systemctl disable trojan-go.service; rm -rf /etc/systemd/system/trojan-go.service /usr/bin/trojan-go /etc/trojan-go
-### 如不启用cloudflare cdn，脚本运行前需要关闭cloudflare的小云朵
+### 如不启用cloudflare cdn，脚本运行前需要关闭cloudflare的小云朵,脚本运行完成后可更改两端config.json文件中websocket项false改为true，再重启服务以启用websocket传输方式
 ### 如需启用cloudflare cdn，脚本运行前需要打开cloudflare的小云朵并设置ssl为full以上，并在脚本运行完成后修改两端的config.json文件中websocket项的false改为true后重新运行服务
 
 # tempfile & rm it when exit
