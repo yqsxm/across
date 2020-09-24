@@ -53,4 +53,18 @@ EOF
 systemctl enable trojan-go.service && systemctl daemon-reload && systemctl restart trojan-go.service && systemctl status trojan-go.service | more | grep -A 2 "trojan-go.service"
 
 # info
-echo; echo $(date) All Done; echo password: $password; echo https://$domain
+echo; echo $(date) All Done, minimal client config.json:
+cat <<EOF >$TMPFILE
+{
+    "run_type": "client",
+    "local_addr": "127.0.0.1",
+    "local_port": 1080,
+    "remote_addr": "$domain",
+    "remote_port": 443,
+    "password": [
+        "$password"
+    ]
+}
+EOF
+
+cat $TMPFILE
