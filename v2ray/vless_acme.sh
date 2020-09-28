@@ -3,8 +3,8 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Usage:  debian 9/10 one_key for caddy2 tls vless v2ray
 # install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/v2ray/vless_acme.sh) my.domain.com CF_Key CF_Email
-# uninstall: apt purge caddy -y; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; rm -rf /usr/local/etc/v2ray /var/log/v2ray; /root/.acme.sh/acme.sh --uninstall
-## Tips: 个人使用，仅供参考，当前配置: tcp tls vless caddy 
+# uninstall: apt purge caddy -y; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; systemctl disable v2ray; rm -rf /usr/local/etc/v2ray /var/log/v2ray; /root/.acme.sh/acme.sh --uninstall
+## Tips: 个人使用，仅供参考，当前配置: tcp xtls vless caddy
 
 # tempfile & rm it when exit
 trap 'rm -f "$TMPFILE"' EXIT
@@ -22,9 +22,8 @@ v2my_uuid=$(cat /proc/sys/kernel/random/uuid)
 caddyURL="$(wget -qO-  https://api.github.com/repos/caddyserver/caddy/releases | grep -E "browser_download_url.*linux_amd64\.deb" | cut -f4 -d\" | head -n1)"
 wget -O $TMPFILE $caddyURL && dpkg -i $TMPFILE
 
-# install v2ray; update geoip.dat && geosite.dat
+# install v2ray
 bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
-bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh)
 
 # install acme.sh installcert
 apt install socat -y
