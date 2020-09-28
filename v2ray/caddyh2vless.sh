@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Usage:  debian 9/10 one_key for caddy2 v2ray
 # install: bash <(curl -s https://raw.githubusercontent.com/mixool/across/master/v2ray/caddyh2vless.sh) my.domain.com
-# uninstall: apt purge caddy -y; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; rm -rf /usr/local/etc/v2ray /var/log/v2ray
+# uninstall: apt purge caddy -y; bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove; systemctl disable v2ray; rm -rf /usr/local/etc/v2ray /var/log/v2ray
 
 # tempfile & rm it when exit
 trap 'rm -f "$TMPFILE"' EXIT
@@ -20,9 +20,8 @@ v2my_path=$(tr -dc 'a-z0-9A-Z' </dev/urandom | head -c 16)
 caddyURL="$(wget -qO-  https://api.github.com/repos/caddyserver/caddy/releases | grep -E "browser_download_url.*linux_amd64\.deb" | cut -f4 -d\" | head -n1)"
 wget -O $TMPFILE $caddyURL && dpkg -i $TMPFILE
 
-# install v2ray; update geoip.dat && geosite.dat
+# install v2ray
 bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
-bash <(curl https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh)
 
 # config caddy
 cat <<EOF >/etc/caddy/Caddyfile
