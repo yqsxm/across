@@ -2,6 +2,8 @@
 ## 用于https://github.com/mixool/dockershc项目安装运行shadowsocks的脚本
 export PORT
 
+echo $PORT
+
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
     apk add --no-cache shadowsocks-libev >/dev/null 2>&1
