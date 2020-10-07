@@ -1,5 +1,6 @@
 #!/bin/sh
 ## 用于https://github.com/mixool/dockershc项目安装运行shadowsocks的脚本
+export PORT
 
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
