@@ -3,6 +3,7 @@
 
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
     apk add --no-cache shadowsocks-libev >/dev/null 2>&1
     mv /usr/bin/ss-server /usr/bin/workerone
     v2rayplugin_URL="$(wget -qO- https://api.github.com/repos/shadowsocks/v2ray-plugin/releases/latest | grep -E "browser_download_url.*linux-amd64" | cut -f4 -d\")"
