@@ -31,7 +31,7 @@ if [[ "$(command -v workerone)" == "" ]]; then
     }
 }
 EOF
-    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb
+    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
     rm -rf /*.json /geo* /systemd/system/v2ray* /v2ctl /*.sig
 else
     # start 
