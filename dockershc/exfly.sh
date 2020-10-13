@@ -34,5 +34,5 @@ if [[ "$(command -v workerone)" == "" ]]; then
 EOF
 else
     # start 
-    workerone -config /usr/bin/config.json
+    workerone -config /usr/bin/config.json >/dev/null 2>&1
 fi
