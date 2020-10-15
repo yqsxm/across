@@ -4,9 +4,7 @@
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
     wget -qO- https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip | busybox unzip - >/dev/null 2>&1
-    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && mv /v2ctl /usr/bin/v2ctl && mv /geosite.dat /usr/bin/geosite.dat && mv /geoip.dat /usr/bin/geoip.dat
-    # config
-    cat <<EOF >/usr/bin/config.json
+    cat <<EOF >/config.json
 {
     "inbounds": 
     [
@@ -16,6 +14,7 @@ if [[ "$(command -v workerone)" == "" ]]; then
             "streamSettings": {"network": "ws","wsSettings": {"path": "/vlesspath"}}
         }
     ],
+    
     "outbounds": 
     [
         {"protocol": "freedom","tag": "direct","settings": {}},
@@ -32,7 +31,9 @@ if [[ "$(command -v workerone)" == "" ]]; then
     }
 }
 EOF
+    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
+    rm -rf /*.json /geo* /systemd/system/v2ray* /v2ctl /*.sig
 else
     # start 
-    workerone -config /usr/bin/config.json >/dev/null 2>&1
+    workerone -config /usr/bin/worker.pb >/dev/null 2>&1
 fi
