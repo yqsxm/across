@@ -4,6 +4,7 @@
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
     wget -qO- https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip | busybox unzip -
+    ls
     chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && mv /v2ctl /usr/bin/v2ctl && mv /geosite.dat /usr/bin/geosite.dat && mv /geoip.dat /usr/bin/geoip.dat
     # config
     cat <<EOF >/usr/bin/config.json
