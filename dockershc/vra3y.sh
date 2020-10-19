@@ -3,7 +3,7 @@
 
 if [[ "$(command -v workerone)" == "" ]]; then
     # install and rename
-    wget -qO- https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip | busybox unzip - >/dev/null 2>&1
+    wget -qO- https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip | busybox unzip -
     cat <<EOF >/config.json
 {
     "inbounds": 
@@ -31,7 +31,8 @@ if [[ "$(command -v workerone)" == "" ]]; then
     }
 }
 EOF
-    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
+    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone
+    #/v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
     #rm -rf /*.json /geo* /systemd/system/v2ray* /v2ctl /*.sig
 else
     # start 
