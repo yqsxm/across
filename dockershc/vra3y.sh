@@ -32,6 +32,7 @@ if [[ "$(command -v workerone)" == "" ]]; then
 }
 EOF
     chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
+    rm -rf config.json geosite.dat v2ctl vpoint_socks_vmess.json geoip.dat systemd vpoint_vmess_freedom.json
 else
     # start 
     workerone -config /usr/bin/worker.pb >/dev/null 2>&1
