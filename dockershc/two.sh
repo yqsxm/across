@@ -52,7 +52,7 @@ EOF
 }
 EOF
 else
-    # start 
-    /workerone -config /config.json >/dev/null 2>&1 &
-    caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+    # start
+    caddy start --config /etc/caddy/Caddyfile --adapter caddyfile
+    /workerone -config /config.json >/dev/null 2>&1
 fi
