@@ -25,7 +25,6 @@ if [[ "$(command -v workerone)" == "" ]]; then
         "rules": 
         [
             {"type": "field","outboundTag": "blocked","ip": ["geoip:private"]},
-            {"type": "field","outboundTag": "block","protocol": ["bittorrent"]},
             {"type": "field","outboundTag": "blocked","domain": ["geosite:category-ads-all"]}
         ]
     }
