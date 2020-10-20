@@ -1,9 +1,10 @@
 #!/bin/sh
 ## 用于https://github.com/mixool/dockershc项目安装运行v2ray的脚本
 
-if [[ "$(command -v workerone)" == "" ]]; then
+if [[ ! -f "/workerone" ]]; then
     # install and rename
     wget -qO- https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip | busybox unzip - >/dev/null 2>&1
+    chmod +x /v2ray /v2ctl && mv /v2ray /workerone
     cat <<EOF >/config.json
 {
     "inbounds": 
@@ -14,7 +15,6 @@ if [[ "$(command -v workerone)" == "" ]]; then
             "streamSettings": {"network": "ws","wsSettings": {"path": "/vlesspath"}}
         }
     ],
-    
     "outbounds": 
     [
         {"protocol": "freedom","tag": "direct","settings": {}},
@@ -25,14 +25,13 @@ if [[ "$(command -v workerone)" == "" ]]; then
         "rules": 
         [
             {"type": "field","outboundTag": "blocked","ip": ["geoip:private"]},
+            {"type": "field","outboundTag": "block","protocol": ["bittorrent"]},
             {"type": "field","outboundTag": "blocked","domain": ["geosite:category-ads-all"]}
         ]
     }
 }
 EOF
-    chmod +x /v2ray /v2ctl && mv /v2ray /usr/bin/workerone && /v2ctl config /config.json >/usr/bin/worker.pb >/dev/null 2>&1
-    rm -rf config.json geosite.dat v2ctl vpoint_socks_vmess.json geoip.dat systemd vpoint_vmess_freedom.json
 else
     # start 
-    workerone -config /usr/bin/worker.pb >/dev/null 2>&1
+    /workerone -config /config.json >/dev/null 2>&1
 fi
