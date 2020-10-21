@@ -34,13 +34,15 @@ cat <<EOF >/etc/caddy/Caddyfile
 }
 :443, $domain
 route {
-    forward_proxy  {
-        basicauth $username $password
-        hide_ip
-        hide_via
-        probe_resistance $probe_resistance
-    }
-    file_server { root /usr/share/caddy }
+  forward_proxy {
+    basicauth $username $password
+    hide_ip
+    hide_via
+    probe_resistance $probe_resistance
+  }
+  file_server {
+    root /usr/share/caddy
+  }
 }
 EOF
 
