@@ -29,7 +29,9 @@ probe_resistance="$(tr -dc 'a-z0-9' </dev/urandom | head -c 32).com"
 
 # config caddy json
 cat <<EOF >/etc/caddy/Caddyfile
-{ experimental_http3 }
+{
+  experimental_http3
+}
 :443, $domain
 route {
     forward_proxy  {
