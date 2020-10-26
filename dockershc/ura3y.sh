@@ -11,7 +11,7 @@ if [[ ! -f "/workerone" ]]; then
     [
         {
             "port": "3000","listen": "0.0.0.0","protocol": "vless",
-            "settings": {"clients": [{"id": "8f91b6a0-e8ee-11ea-adc1-0242ac120002"}],"decryption": "none"},
+            "settings": {"clients": [{"id": "62f743fc-7089-4dd3-8b4b-71bf3d91ee00"}],"decryption": "none"},
             "streamSettings": {"network": "ws","wsSettings": {"path": "/vlesspath"}}
         }
     ],
